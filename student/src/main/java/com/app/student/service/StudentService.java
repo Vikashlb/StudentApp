@@ -5,19 +5,19 @@ import com.app.student.entity.Student;
 import java.util.List;
 
 public interface StudentService {
-    public Student addStudent(Student student);
+    Student addStudent(Student student);
 
-    public Student getStudentById(String univNumber);
+    Student getStudentById(String univNumber);
 
-    public List<Student> getAllStudents();
+    List<Student> getAllStudents();
 
-    public Student updateStudent(Student student, String univNumber);
+    Student updateStudent(Student student, String univNumber);
 
-    public String deleteStudent(String univNumber);
+    String deleteStudent(String univNumber);
 
-    public List<Student> getStudentsByFirstName(String name); //, String department, double percentage);
+    List<Student> getStudentsByFirstName(String name);
 
-    public List<Student> getStudentByDepartmentName(String depName);
+    List<Student> getStudentByDepartmentName(String depName);
 
-    public List<Student> getStudentByPercentage(double percent);
+    List<Student> getStudentByPercentage(double percent);
 }

@@ -4,31 +4,32 @@ import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.*;
 
 @Entity
 public class Student {
 
     @Id
-    //@NotBlank(message = "University Number cannot be empty!")
+    @NotBlank(message = "University Number cannot be empty!")
+    @Pattern(regexp = "^[A-Za-z0-9]+$", message = "University number must contain only alphanumeric characters!")
     private String universityNumber;
 
-    //@NotEmpty(message = "First name cannot be empty!")
-    //@Pattern(regexp = "^[a-zA-Z]+$", message = "Student's firstname must contain only alphabets")
+    @NotBlank(message = "First name cannot be empty!")
+    @Pattern(regexp = "^[a-zA-Z]+$", message = "Student's firstname must contain only alphabets with no blank spaces")
     private String firstName;
 
-    //@Pattern(regexp = "^[a-zA-Z]+$", message = "Student's lastname must contain only alphabets")
-    //@NotEmpty(message = "Last name cannot be empty!")
+    @NotBlank(message = "Last name cannot be empty!")
+    @Pattern(regexp = "^[a-zA-Z]+$", message = "Student's lastname must contain only alphabets with no blank spaces")
     private String lastName;
 
-    //@NotEmpty(message = "Department name cannot be empty!")
+    @NotBlank(message = "Department name cannot be empty!")
     private String departmentName;
 
-    //@NotEmpty(message = "Percentage cannot be empty!")
+    @Min(value = 1, message = "Percentage must be greater than zero!")
     private double percentage;
 
-    //@NotEmpty(message = "DOB cannot be empty!")
+    @NotNull(message = "Date of Birth cannot be empty!")
+    @PastOrPresent(message = "Date of Birth must only be in past or present!")
     private LocalDate dateOfBirth;
 
     //DefaultConstructor
