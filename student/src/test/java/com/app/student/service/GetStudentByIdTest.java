@@ -40,11 +40,13 @@ public class GetStudentByIdTest {
         Assertions.assertEquals("Computer Applications", result.getDepartmentName());
         Assertions.assertEquals(85.20, result.getPercentage());
         Assertions.assertEquals(LocalDate.parse("2002-06-10"), result.getDateOfBirth());
+        Mockito.verify(studentRepository,Mockito.times(1)).findById("22MX228");
     }
 
     @Test
     void ShouldThrowException_WhenIdIsInvalid() {
         Mockito.when(studentRepository.findById("22MX228")).thenThrow(StudentNotFoundException.class);
         Assertions.assertThrows(StudentNotFoundException.class, () -> studentService.getStudentById("22MX228"));
+        Mockito.verify(studentRepository,Mockito.times(1)).findById("22MX228");
     }
 }

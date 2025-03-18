@@ -42,6 +42,7 @@ public class GetAllStudentsTest {
         Assertions.assertEquals(2,result.size());
         Assertions.assertEquals("22MX228", result.getFirst().getUniversityNumber());
         Assertions.assertEquals("22MX221", result.getLast().getUniversityNumber());
+        Mockito.verify(studentRepository, Mockito.times(1)).findAll();
     }
 
     @Test
@@ -50,5 +51,6 @@ public class GetAllStudentsTest {
         Mockito.when(studentRepository.findAll()).thenThrow(StudentNotFoundException.class);
 
         Assertions.assertThrows(StudentNotFoundException.class, () -> studentService.getAllStudents());
+        Mockito.verify(studentRepository, Mockito.times(1)).findAll();
     }
 }

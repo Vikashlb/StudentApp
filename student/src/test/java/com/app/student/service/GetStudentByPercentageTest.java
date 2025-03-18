@@ -42,11 +42,13 @@ public class GetStudentByPercentageTest {
         Assertions.assertEquals(2, result.size());
         Assertions.assertEquals(85.45, result.getFirst().getPercentage());
         Assertions.assertEquals(85.45, result.getLast().getPercentage());
+        Mockito.verify(studentRepository,Mockito.times(1)).findByPercentageEquals(85.45);
     }
 
     @Test
     void shouldThrowException_WhenDepartmentNameDoesNotExist() {
         Mockito.when(studentRepository.findByPercentageEquals(85.45)).thenThrow(StudentNotFoundException.class);
         Assertions.assertThrows(StudentNotFoundException.class, () -> studentService.getStudentByPercentage(85.45));
+        Mockito.verify(studentRepository,Mockito.times(1)).findByPercentageEquals(85.45);
     }
 }

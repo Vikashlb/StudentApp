@@ -42,11 +42,13 @@ public class GetStudentsByFirstNameTest {
         Assertions.assertEquals(2, result.size());
         Assertions.assertEquals("Sanjay", result.getFirst().getFirstName());
         Assertions.assertEquals("Santhosh", result.getLast().getFirstName());
+        Mockito.verify(studentRepository,Mockito.times(1)).findByFirstNameLikeIgnoreCase("San"+"%");
     }
 
     @Test
     void shouldThrowException_WhenNameDoesNotExist() {
         Mockito.when(studentRepository.findByFirstNameLikeIgnoreCase("San"+"%")).thenThrow(StudentNotFoundException.class);
         Assertions.assertThrows(StudentNotFoundException.class, () -> studentService.getStudentsByFirstName("San"));
+        Mockito.verify(studentRepository,Mockito.times(1)).findByFirstNameLikeIgnoreCase("San"+"%");
     }
 }

@@ -27,12 +27,12 @@ public class DeleteStudentTest {
         Student student = new Student("22MX228", "Vikash", "Bojarajan",
                 "Computer Applications", 84.30, LocalDate.parse("2002-06-10"));
         Mockito.when(studentRepository.existsById("22MX228")).thenReturn(true);
-        Mockito.doNothing().when(studentRepository).deleteById("22MX228");
+        Mockito.doNothing().when(studentRepository).deleteById(student.getUniversityNumber());
 
         String result = studentService.deleteStudent("22MX228");
 
         Assertions.assertEquals("Student Record Successfully Deleted", result);
-        Mockito.verify(studentRepository, Mockito.times(1)).deleteById(student.getUniversityNumber());
+        Mockito.verify(studentRepository, Mockito.times(1)).deleteById("22MX228");
     }
 
     @Test
@@ -40,5 +40,6 @@ public class DeleteStudentTest {
         Mockito.when(studentRepository.existsById("22MX228")).thenThrow(StudentNotFoundException.class);
 
         Assertions.assertThrows(StudentNotFoundException.class, () -> studentService.deleteStudent("22MX228"));
+        Mockito.verify(studentRepository, Mockito.never()).deleteById("22MX228");
     }
 }

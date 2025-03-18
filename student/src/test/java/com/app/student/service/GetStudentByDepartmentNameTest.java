@@ -42,11 +42,13 @@ public class GetStudentByDepartmentNameTest {
         Assertions.assertEquals(2, result.size());
         Assertions.assertEquals("Computer Science", result.getFirst().getDepartmentName());
         Assertions.assertEquals("Computer Applications", result.getLast().getDepartmentName());
+        Mockito.verify(studentRepository,Mockito.times(1)).findByDepartmentNameLikeIgnoreCase("Computer"+"%");
     }
 
     @Test
     void shouldThrowException_WhenDepartmentNameDoesNotExist() {
         Mockito.when(studentRepository.findByDepartmentNameLikeIgnoreCase("Computer"+"%")).thenThrow(StudentNotFoundException.class);
         Assertions.assertThrows(StudentNotFoundException.class, () -> studentService.getStudentByDepartmentName("Computer"));
+        Mockito.verify(studentRepository,Mockito.times(1)).findByDepartmentNameLikeIgnoreCase("Computer"+"%");
     }
 }
