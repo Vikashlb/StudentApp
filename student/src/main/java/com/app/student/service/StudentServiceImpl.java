@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.app.student.entity.Student;
-import com.app.student.exception.StudentNotFoundException;
 import com.app.student.exception.DuplicateRecordException;
+import com.app.student.exception.StudentNotFoundException;
 import com.app.student.repository.StudentRepository;
 
 @Service
@@ -68,16 +68,28 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<Student> getStudentsByFirstName(String name) {
-        return studentRepository.findByFirstNameLikeIgnoreCase(name+"%");
+        List<Student> students =  studentRepository.findByFirstNameLikeIgnoreCase(name+"%");
+        if(students.isEmpty()) {
+            throw new StudentNotFoundException("Student Record With Name : '"+ name +"' Not Found!");
+        }
+        return students;
     }
 
     @Override
     public List<Student> getStudentByDepartmentName(String depName) {
-        return studentRepository.findByDepartmentNameLikeIgnoreCase(depName+"%");
+        List<Student> students = studentRepository.findByDepartmentNameLikeIgnoreCase(depName+"%");
+        if(students.isEmpty()) {
+            throw new StudentNotFoundException("Student Record With Department : '"+ depName +"' Not Found!");
+        }
+        return students;
     }
 
     @Override
     public List<Student> getStudentByPercentage(double percent) {
-        return studentRepository.findByPercentageEquals(percent);
+        List<Student> students = studentRepository.findByPercentageEquals(percent);
+        if(students.isEmpty()) {
+            throw new StudentNotFoundException("Student Record With Percentage : '"+ percent +"' Not Found!");
+        }
+        return students;
     }
 }
