@@ -1,6 +1,7 @@
 package com.app.student.service;
 
 import com.app.student.entity.Student;
+import com.app.student.exception.StudentNotFoundException;
 import com.app.student.repository.StudentRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -10,12 +11,13 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
+
 import java.time.LocalDate;
 import java.util.Optional;
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
-public class StudentServiceTest {
+public class GetStudentByIdTest {
     @Mock
     private StudentRepository studentRepository;
 
@@ -23,7 +25,7 @@ public class StudentServiceTest {
     private StudentServiceImpl studentService;
 
     @Test
-    void getStudentByID_Valid_GetStudentList() {
+    void shouldReturnStudent_WhenIdIsValid() {
         Student student = new Student("22MX228", "Vikash", "Bojarajan",
                 "Computer Applications", 85.2, LocalDate.parse( "2002-06-10"));
 
@@ -38,5 +40,11 @@ public class StudentServiceTest {
         Assertions.assertEquals("Computer Applications", result.getDepartmentName());
         Assertions.assertEquals(85.20, result.getPercentage());
         Assertions.assertEquals(LocalDate.parse("2002-06-10"), result.getDateOfBirth());
+    }
+
+    @Test
+    void ShouldThrowException_WhenIdIsInvalid() {
+        Mockito.when(studentRepository.findById("22MX228")).thenThrow(StudentNotFoundException.class);
+        Assertions.assertThrows(StudentNotFoundException.class, () -> studentService.getStudentById("22MX228"));
     }
 }
