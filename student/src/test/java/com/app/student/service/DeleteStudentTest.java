@@ -1,6 +1,7 @@
 package com.app.student.service;
 
 import com.app.student.entity.Student;
+import com.app.student.exception.StudentNotFoundException;
 import com.app.student.repository.StudentRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -32,5 +33,12 @@ public class DeleteStudentTest {
 
         Assertions.assertEquals("Student Record Successfully Deleted", result);
         Mockito.verify(studentRepository, Mockito.times(1)).deleteById(student.getUniversityNumber());
+    }
+
+    @Test
+    void shouldThrowException_WhenIdDoesNotExist(){
+        Mockito.when(studentRepository.existsById("22MX228")).thenThrow(StudentNotFoundException.class);
+
+        Assertions.assertThrows(StudentNotFoundException.class, () -> studentService.deleteStudent("22MX228"));
     }
 }
