@@ -43,18 +43,19 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student updateStudent(Student student, String univNumber) {
+        Student updatedStudent;
         if(studentRepository.existsById(univNumber)){
             student.setFirstName(student.getFirstName());
             student.setLastName(student.getLastName());
             student.setDepartmentName(student.getDepartmentName());
             student.setPercentage(student.getPercentage());
             student.setDateOfBirth(student.getDateOfBirth());
-            studentRepository.save(student);
+            updatedStudent = studentRepository.save(student);
         }
         else {
             throw new StudentNotFoundException("Student Record Doesn't Exist!");
         }
-        return getStudentById(student.getUniversityNumber());
+        return updatedStudent;
     }
 
     @Override
