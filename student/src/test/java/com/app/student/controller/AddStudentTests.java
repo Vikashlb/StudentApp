@@ -51,12 +51,13 @@ public class AddStudentTests {
     public void ShouldReturnConflict_WhenIdAlreadyExists() throws Exception {
         Student student = new Student("22MX228", "Sanjay", "Krishna",
                 "Computer Applications", 84.30, LocalDate.parse("2002-06-10"));
-        given(studentService.addStudent(ArgumentMatchers.any())).willThrow(DuplicateRecordException.class);
+        given(studentService.addStudent(ArgumentMatchers.any())).willThrow(new DuplicateRecordException("Student Record Already Exists!"));
         ResultActions response = mockMvc.perform(post("/addStudent")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(student)));
 
         response.andExpect(MockMvcResultMatchers.status().isConflict())
-                .andExpect(jsonPath("$.statusCode").value(409));
+                .andExpect(jsonPath("$.statusCode").value(409))
+                .andExpect(jsonPath("$.errorMessage").value("Student Record Already Exists!"));
     }
 }
