@@ -4,6 +4,7 @@ import com.app.student.entity.Student;
 import com.app.student.exception.DuplicateRecordException;
 import com.app.student.service.StudentServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatchers;
@@ -34,10 +35,16 @@ public class AddStudentTests {
     @Autowired
     private ObjectMapper objectMapper;
 
+    private Student student;
+
+    @BeforeEach
+    void init() {
+        student = new Student("22MX228", "Sanjay", "Krishna",
+                "Computer Applications", 84.30, LocalDate.parse("2002-06-10"));
+    }
+
     @Test
     public void ShouldReturnOk_WhenIdDoesNotExist() throws Exception {
-        Student student = new Student("22MX228", "Sanjay", "Krishna",
-                "Computer Applications", 84.30, LocalDate.parse("2002-06-10"));
         given(studentService.addStudent(ArgumentMatchers.any())).willAnswer((invocation -> invocation.getArgument(0)));
         ResultActions response = mockMvc.perform(post("/addStudent")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -49,8 +56,6 @@ public class AddStudentTests {
 
     @Test
     public void ShouldReturnConflict_WhenIdAlreadyExists() throws Exception {
-        Student student = new Student("22MX228", "Sanjay", "Krishna",
-                "Computer Applications", 84.30, LocalDate.parse("2002-06-10"));
         given(studentService.addStudent(ArgumentMatchers.any())).willThrow(new DuplicateRecordException("Student Record Already Exists!"));
         ResultActions response = mockMvc.perform(post("/addStudent")
                 .contentType(MediaType.APPLICATION_JSON)
