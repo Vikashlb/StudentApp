@@ -45,7 +45,7 @@ public class AddStudentTests {
 
     @Test
     public void ShouldReturnOk_WhenIdDoesNotExist() throws Exception {
-        given(studentService.addStudent(ArgumentMatchers.any())).willAnswer((invocation -> invocation.getArgument(0)));
+        given(studentService.addStudent(ArgumentMatchers.any())).willReturn(student);
         ResultActions response = mockMvc.perform(post("/addStudent")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(student)));
