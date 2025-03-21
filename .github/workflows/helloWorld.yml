@@ -1,0 +1,12 @@
+name: HelloWorldAction
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  helloWorld:
+    name: printHelloWorld
+    runs-on: windows-latest
+    steps:
+      - name: print_hello_world
+        run: echo "Hello World!"
