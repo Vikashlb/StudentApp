@@ -6,7 +6,10 @@ on:
 jobs:
   helloWorld:
     name: printHelloWorld
-    runs-on: windows-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{matrix.os}}
     steps:
       - name: print_hello_world
         run: echo "Hello World!"
