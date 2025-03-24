@@ -13,10 +13,7 @@ on:
 jobs:
   build:
     name: Lint
-    strategy:
-      matrix:
-        os: [windows-latest, ubuntu-latest, macos-latest]
-    runs-on: ${{matrix.os}}
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: read
