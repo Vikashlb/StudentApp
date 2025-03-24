@@ -10,6 +10,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -28,7 +30,7 @@ jobs:
       - name: Commit Changes
         run: |
           git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
+          git config user.email "${{github.actor}}@github.com"
           git add .
           git diff --quiet || git commit -m "Auto-formatted code!"
           git push
