@@ -14,45 +14,45 @@ public class TeacherController {
     @Autowired
     private StudentServiceImpl studentServiceImpl;
 
-    @PostMapping("/addStudent")
+    @PostMapping("/addStudenta")
     public Student addStudent(   @RequestBody @Valid Student student) {
 
         return studentServiceImpl.addStudent(student);
     }
 
-    @GetMapping("/getStudentById/{id}")
+    @GetMapping("/getStudentByIda/{id}")
     public Student getStudentById(     @PathVariable("id") String univNumber) {
         return studentServiceImpl.getStudentById(univNumber);
     }
 
-    @GetMapping("/getAllStudents")
+    @GetMapping("/getAllStudentsa")
     public List<Student> getAllStudents() {
 
           return studentServiceImpl.getAllStudents();
     }
 
-    @PutMapping("/updateStudent/{id}")
+    @PutMapping("/updateStudenta/{id}")
     public Student updateStudent(@RequestBody @Valid Student student, @PathVariable("id") String univNumber) {
                return studentServiceImpl.updateStudent(student, univNumber);
     }
 
-    @DeleteMapping("/deleteStudentById/{id}")
+    @DeleteMapping("/deleteStudentByIda/{id}")
     public String deleteStudentById(@PathVariable("id") String univNumber) {
                  return studentServiceImpl.deleteStudent(univNumber);
     }
 
-    @GetMapping("/getStudentByName/{name}")
+    @GetMapping("/getStudentByNamea/{name}")
     public List<Student> getStudentByName(@PathVariable("name") String firstName) {
                  return studentServiceImpl.getStudentsByFirstName(firstName);
     }
 
-    @GetMapping("/getStudentByDepartment/{department}")
+    @GetMapping("/getStudentByDepartmenta/{department}")
     public List<Student> getStudentByDepartment(@PathVariable("department") String departmentName)
     {
            return studentServiceImpl.getStudentByDepartmentName(departmentName);
     }
 
-    @GetMapping("/getStudentByPercentage/{percentage}")
+    @GetMapping("/getStudentByPercentagea/{percentage}")
     public List<Student> getStudentByPercentage(@PathVariable("percentage") double percentage)
     {
         return studentServiceImpl.getStudentByPercentage(percentage);
