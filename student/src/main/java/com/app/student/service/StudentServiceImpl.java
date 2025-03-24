@@ -91,6 +91,6 @@ public class StudentServiceImpl implements StudentService {
         if(students.isEmpty()) {
             throw new StudentNotFoundException("Student Record With Percentage : '"+ percent +"' Not Found!");
         }
-        return teachers;
+        return students;
     }
 }
