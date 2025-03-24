@@ -24,3 +24,11 @@ jobs:
       - name : Fix Formatting
         working-directory: student
         run: mvn spotless:apply
+
+      - name: Commit Changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add .
+          git diff --quiet || git commit -m "Auto-formatted code!"
+          git push
