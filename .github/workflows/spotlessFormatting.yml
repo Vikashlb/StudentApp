@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  format:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -25,25 +25,29 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name : Fix Formatting and Add Changes
+      - name: Git Config
+        working-directory: student
+        run: |
+          git config user.name "Vikashlb"
+          git config user.email "$Vikashlb@users.noreply.github.com"
+
+      - name : Apply Formatting
         working-directory: student
         run: |
           mvn spotless:apply
+
+      - name : Stage Changes
+        working-directory: student
+        run: |
           git add .
           git status
-          git diff
-
-      - name: Git Config
-        working-directory: student
-        run : |
-          git config user.name "Vikashlb"
-          git config user.email "$Vikashlb@users.noreply.github.com"
 
       - name: Commit Changes
         working-directory: student
         run: |
-          git add .
-          git status
-          git diff --staged 
-          git diff --quiet || git commit -m "Auto-formatted code!"
-          git push origin master
+          git commit -m "Auto-formatted code!" || echo "No changes to commit!!"
+
+      - name: Push Changes
+        working-directory: student
+        run : |
+          git push
