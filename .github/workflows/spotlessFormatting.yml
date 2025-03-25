@@ -29,17 +29,20 @@ jobs:
         working-directory: student
         run: |
           mvn spotless:apply
-          git add .
           git status
           git diff
+
+      - name: Git Config
+        working-directory: student
+        run : |
+          git config user.name "Vikashlb"
+          git config user.email "$Vikashlb@users.noreply.github.com"
 
       - name: Commit Changes
         working-directory: student
         run: |
-          git config user.name "Vikashlb"
-          git config user.email "$Vikashlb@users.noreply.github.com"
-          git add -A
+          git add .
           git status
           git diff --staged 
           git diff --quiet || git commit -m "Auto-formatted code!"
-          git push
+          git push origin master
