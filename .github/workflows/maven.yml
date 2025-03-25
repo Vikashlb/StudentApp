@@ -9,10 +9,10 @@ on:
 
 jobs:
   build:
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-    runs-on: ${{matrix.os}}
+#    strategy:
+#      matrix:
+#        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ubuntu-latest #${{matrix.os}}
 
     steps:
     - name: Checkout Repository
