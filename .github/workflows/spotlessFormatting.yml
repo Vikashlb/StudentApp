@@ -29,8 +29,8 @@ jobs:
 
       - name: Commit Changes
         run: |
-          git config user.name "github-actions"
-          git config user.email "${{github.actor}}@github.com"
+          git config user.name "Vikashlb"
+          git config user.email "$Vikashlb@users.noreply.github.com"
           git add .
           git diff --quiet || git commit -m "Auto-formatted code!"
           git push
