@@ -25,10 +25,11 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name : Fix Formatting
+      - name : Fix Formatting and Add Changes
         working-directory: student
         run: |
           mvn spotless:apply
+          git add .
           git status
           git diff
 
