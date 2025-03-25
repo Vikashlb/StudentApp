@@ -29,6 +29,8 @@ jobs:
         working-directory: student
         run: |
           mvn spotless:apply
+          git status
+          git diff
 
       - name: Commit Changes
         run: |
