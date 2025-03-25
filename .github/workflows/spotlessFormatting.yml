@@ -7,6 +7,8 @@ on:
   pull_request:
     branches: [master]
 
+  workflow_dispatch:
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -27,13 +29,13 @@ jobs:
         working-directory: student
         run: |
           mvn spotless:apply
-          git status
-          git diff
 
       - name: Commit Changes
         run: |
           git config user.name "Vikashlb"
           git config user.email "$Vikashlb@users.noreply.github.com"
-          git add .
+          git add -A
+          git status
+          git diff --staged 
           git diff --quiet || git commit -m "Auto-formatted code!"
           git push
