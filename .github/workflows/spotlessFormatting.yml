@@ -31,7 +31,6 @@ jobs:
           git diff
 
       - name: Commit Changes
-        working-directory: student
         run: |
           git config user.name "Vikashlb"
           git config user.email "$Vikashlb@users.noreply.github.com"
