@@ -5,8 +5,17 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.time.LocalDate;
 
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "student")
 public class Student {
@@ -45,73 +54,4 @@ public class Student {
   @PastOrPresent(message = "Date of Birth must only be in past or present!")
   @Column(name = "date_of_birth")
   private LocalDate dateOfBirth;
-
-  // DefaultConstructor
-  public Student() {}
-
-  // ParamConstructor
-  public Student(
-      String univNumber,
-      String fName,
-      String lName,
-      String depName,
-      double percent,
-      LocalDate dob) {
-    this.universityNumber = univNumber;
-    this.firstName = fName;
-    this.lastName = lName;
-    this.departmentName = depName;
-    this.percentage = percent;
-    this.dateOfBirth = dob;
-  }
-
-  // Getters
-  public String getUniversityNumber() {
-    return universityNumber;
-  }
-
-  public String getFirstName() {
-    return firstName;
-  }
-
-  public String getLastName() {
-    return lastName;
-  }
-
-  public String getDepartmentName() {
-    return departmentName;
-  }
-
-  public double getPercentage() {
-    return percentage;
-  }
-
-  public LocalDate getDateOfBirth() {
-    return dateOfBirth;
-  }
-
-  // Setters
-  public void setUniversityNumber(String universityNumber) {
-    this.universityNumber = universityNumber;
-  }
-
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
-
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
-  }
-
-  public void setDepartmentName(String departmentName) {
-    this.departmentName = departmentName;
-  }
-
-  public void setPercentage(double percentage) {
-    this.percentage = percentage;
-  }
-
-  public void setDateOfBirth(LocalDate dateOfBirth) {
-    this.dateOfBirth = dateOfBirth;
-  }
 }
