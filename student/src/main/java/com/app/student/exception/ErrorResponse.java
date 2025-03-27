@@ -1,8 +1,7 @@
 package com.app.student.exception;
 
-import lombok.Getter;
-
 import java.time.LocalDateTime;
+import lombok.Getter;
 
 @Getter
 public class ErrorResponse {
@@ -15,5 +14,4 @@ public class ErrorResponse {
     this.statusCode = statusCode;
     this.errorMessage = errorMessage;
   }
-
 }
